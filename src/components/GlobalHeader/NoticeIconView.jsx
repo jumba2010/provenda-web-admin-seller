@@ -10,11 +10,11 @@ class GlobalHeaderRight extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
 
-    if (dispatch) {
-      dispatch({
-        type: 'global/fetchNotices',
-      });
-    }
+    // if (dispatch) {
+    //   dispatch({
+    //     type: 'global/fetchNotices',
+    //   });
+    // }
   }
 
   changeReadState = (clickedItem) => {

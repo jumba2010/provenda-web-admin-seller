@@ -39,7 +39,7 @@ const Register = props => {
   const [signedbygoogle, setSignedbygoogle] = useState(false);
   const [googleerror, setGoogleerror] = useState('');
   const history = useHistory();
-  const dispatch =props;
+  const {dispatch} =props;
 
   const [form] = Form.useForm();
 
@@ -66,9 +66,7 @@ const Register = props => {
   const handleSubmit =async( )=> {
 
     const fieldsValue = await form.validateFields();
-    dispatch({
-      type: 'user/create',
-      payload: {
+    signup({
         latitude: latitude?latitude:alternlatitude,
         name:fieldsValue.name,
         longitude:longitude?longitude:alternlongitude,
@@ -77,8 +75,7 @@ const Register = props => {
         email:fieldsValue.email,
         password:fieldsValue.password,
         phoneNumber:fieldsValue.phoneNumber
-      },
-    });
+      });
     setCurrentStep(1);
  
   };

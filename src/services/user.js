@@ -35,6 +35,8 @@ export async function signup(params) {
     name,password,
     latitude,longitude,countryCode,contactPrefix,phoneNumber
     }=params;
+
+    console.log(email, password);
   auth().createUserWithEmailAndPassword(email, password).then(function() {
     auth().signInWithEmailAndPassword(email, password);
 

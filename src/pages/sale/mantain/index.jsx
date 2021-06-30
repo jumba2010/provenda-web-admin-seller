@@ -24,7 +24,7 @@ const ListSales = (props) => {
   const [sale, setSale] = useState({});
   const [paymentType,setPaymentType]=useState('');
   const [selectedKeys, setSelectedKeys] = useState([]);
-  const dispatch = props;
+  const {dispatch} = props;
   const [lastdata, setLastdata] = useState([]);
 
   const [form2] = Form.useForm();

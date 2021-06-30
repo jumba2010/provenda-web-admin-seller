@@ -1,11 +1,12 @@
 import { Tooltip, Tag } from 'antd';
 import { QuestionCircleOutlined } from '@ant-design/icons';
-import React from 'react';
+import React,{useEffect}  from 'react';
 import { connect, SelectLang } from 'umi';
 import Avatar from './AvatarDropdown';
 import HeaderSearch from '../HeaderSearch';
 import styles from './index.less';
 import NoticeIconView from './NoticeIconView';
+import {db} from '../../services/firebase';
 const ENVTagColor = {
   dev: 'orange',
   test: 'green',
@@ -13,9 +14,157 @@ const ENVTagColor = {
 };
 
 const GlobalHeaderRight = (props) => {
-  const { theme, layout } = props;
+  const { theme, layout ,currentUser} = props;
   let className = styles.right;
+  const {dispatch} = props;
 
+  const openNotification = name => {
+    notification.info({
+      message: `New Order has been placed ${name}`,
+      description:
+        'New Order has been placed from:',
+      name,
+    });
+  };
+
+  useEffect(() => { 
+    dispatch({
+     type: 'product/fetchUnities',
+     payload: currentUser.id,
+   });
+
+   dispatch({
+     type: 'product/fetchCategories',
+     payload: currentUser.id,
+   });
+
+   dispatch({
+     type: 'product/fetchTaxes',
+     payload: currentUser.id,
+   });
+
+  //Monitorando Alteracoes da Base de Dados
+  db.collection("products").where("seller.id","==",currentUser.id)
+  .onSnapshot(function(snapshot) {
+      snapshot.docChanges().forEach(function(change) {
+
+          if (change.type === "added") {
+            dispatch({
+                type: 'product/add',
+                payload: change.doc.data(),
+              });
+          }
+          if (change.type === "modified") {
+            dispatch({
+                type: 'product/update',
+                payload: change.doc.data(),
+              });
+          }
+          if (change.type === "removed") {
+            dispatch({
+                type: 'product/remove',
+                payload: change.doc.data(),
+              });
+          }
+      });
+  });
+
+    db.collection("stocks").where("sucursalId","==",currentUser.sucursals[0].id)
+    .onSnapshot(function(snapshot) {
+        snapshot.docChanges().forEach(function(change) {
+            if (change.type === "added") {
+              dispatch({
+                  type: 'product/addStock',
+                  payload: change.doc.data(),
+                });
+            }
+            if (change.type === "modified") {
+              dispatch({
+                  type: 'product/updateStock',
+                  payload: change.doc.data(),
+                });
+            }
+            if (change.type === "removed") {
+              dispatch({
+                  type: 'product/deleteStock',
+                  payload: change.doc.data(),
+                });
+            }
+        });
+    });
+
+  db.collection("orders").where("seller.id","==",currentUser.id)
+  .onSnapshot(function(snapshot) {
+      snapshot.docChanges().forEach(function(change) {
+          if (change.type === "added") {
+            openNotification(change.doc.data().client.name);
+            dispatch({
+                type: 'order/add',
+                payload: change.doc.data(),
+              });
+          }
+          if (change.type === "modified") {
+            dispatch({
+                type: 'order/update',
+                payload: change.doc.data(),
+              });
+          }
+      });
+  });
+
+      //Monitorando Alteracoes da Base de Dados
+      db.collection("orders").where("seller.id","==",currentUser.id)
+      .onSnapshot(function(snapshot) {
+          snapshot.docChanges().forEach(function(change) {
+              if (change.type === "added") {
+                if(change.doc.data().payment.status==='refunded'){
+                  dispatch({
+                    type: 'sale/addrefunded',
+                    payload: change.doc.data(),
+                  });
+                }
+
+                else{
+                  dispatch({
+                    type: 'sale/add',
+                    payload: change.doc.data(),
+                  });
+                }
+
+               
+              }
+              if (change.type === "modified") {
+                if(change.doc.data().status==='refunded'){
+                  dispatch({
+                    type: 'sale/remove',
+                    payload: change.doc.data(),
+                  });
+
+                  dispatch({
+                    type: 'sale/addrefunded',
+                    payload: change.doc.data(),
+                  });
+                }
+                else{
+                  dispatch({
+                    type: 'sale/update',
+                    payload: change.doc.data(),
+                  });
+                }
+               
+              }
+          });
+      });
+
+    //  message.warning({ content: `Please update your profile to activate your account `, key,duration:864000 });
+      // var myVar=setInterval(() => {
+      //   if(false){
+      //     clearInterval(myVar);
+      //   }
+    
+      // }, 1000);
+
+    },[]);
   if (theme === 'dark' && layout === 'top') {
     className = `${styles.right}  ${styles.dark}`;
   }
@@ -72,7 +221,8 @@ const GlobalHeaderRight = (props) => {
   );
 };
 
-export default connect(({ settings }) => ({
+export default connect(({ settings,user }) => ({
   theme: settings.navTheme,
   layout: settings.layout,
+  currentUser:user.currentUser
 }))(GlobalHeaderRight);

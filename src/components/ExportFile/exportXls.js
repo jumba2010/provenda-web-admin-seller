@@ -12,7 +12,7 @@ const ExportXLS = ({ dataset,
     collumns, sheetName }) => {
 
     return (
-        <div>The file will go here</div>
+        <div></div>
         // <ExcelFile element={<Button size='middle' style={{ 'margin-left': '10px' }}> <SaveTwoTone twoToneColor="#13cf7d" /> {formatMessage({ id: 'product.export' })}</Button>}>
         //     <ExcelSheet data={dataset} name={sheetName}>
         //         {

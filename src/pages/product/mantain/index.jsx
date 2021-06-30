@@ -22,7 +22,7 @@ const ListProducts = (props) => {
   const { products=[],stocks=[],fetching } = props;
   const [sorter, setSorter] = useState('');
   const history = useHistory();
-  const dispatch = props;
+  const {dispatch} = props;
   const [visibleDeleteProduct,setVisibleDeleteProduct]= useState(false);
   const [product, setProduct] = useState({});
   const [lastdata, setLastdata] = useState([]);

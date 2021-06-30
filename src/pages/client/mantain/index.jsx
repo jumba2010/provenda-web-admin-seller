@@ -11,7 +11,7 @@ import getXLSData from '../utils/clientxlsdata';
 const ListClient = (props) => {
   const { clients = [],currentUser={}, fetching } = props;
   const [sorter, setSorter] = useState('');
-  const dispatch = props;
+  const {dispatch} = props;
  
   const actionRef = useRef();
 

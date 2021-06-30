@@ -66,6 +66,7 @@ const Login = props => {
       if( user.emailVerified){
         dispatch({
           type: 'user/fetchCurrent',
+          payload:{}
         });
         history.push("/welcome"); 
       }

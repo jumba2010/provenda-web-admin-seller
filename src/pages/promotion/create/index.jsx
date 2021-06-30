@@ -36,7 +36,7 @@ const CreatePromotion = props => {
   });
   const [currentStep, setCurrentStep] = useState(0);
   const [applytoall, setApplytoAll] = useState(true);
-  const dispatch = props;
+  const {dispatch} = props;
   const [success, setSuccess] = useState(false);
   const [savingPromotion, setSavingPromotion] = useState(false);
   const [selectedRowKeys,setSelectedRowKeys]=useState([]);

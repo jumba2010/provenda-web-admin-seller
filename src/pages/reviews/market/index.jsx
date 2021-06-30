@@ -11,7 +11,7 @@ import getXLSData from '../utils/reviewxlsdata';
 const MarketReview = (props) => {
   const { reviews = [],currentUser={}, fetching } = props;
   const [sorter, setSorter] = useState('');
-  const dispatch = props;
+  const {dispatch} = props;
  
   const actionRef = useRef();
 

@@ -41,7 +41,7 @@ const CreateOption = props => {
   });
   const [currentStep, setCurrentStep] = useState(0);
 
-  const dispatch = props;
+  const {dispatch} = props;
   const [savingOtion, setsavingOtion] = useState(false);
   const [groupId, setGroupId]=useState('');
   const [selectedProduct,setSelectedProduct]=useState({});

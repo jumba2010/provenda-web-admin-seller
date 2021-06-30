@@ -15,7 +15,7 @@ const PromotionList = (props) => {
   const [visible,setVisible]= useState(false);
   const [promotion, setPromotion] = useState({});
   const[deisibleDeleteProduct,setVisibleDeleteProduct]= useState([]);
-  const dispatch = props;
+  const {dispatch} = props;
   const [loadingPromotionInativatio,setLoadingPromotionInativatio]= useState(false);
 
   const actionRef = useRef();

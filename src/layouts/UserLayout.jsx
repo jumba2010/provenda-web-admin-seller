@@ -1,9 +1,10 @@
 import { DefaultFooter, getMenuData, getPageTitle } from '@ant-design/pro-layout';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
-import { Link, SelectLang, useIntl, connect, FormattedMessage } from 'umi';
+import { Link, SelectLang, useIntl, connect } from 'umi';
 import React from 'react';
 import logo from '../assets/logo.svg';
 import styles from './UserLayout.less';
+import { GithubOutlined } from '@ant-design/icons';
 
 const UserLayout = (props) => {
   const {
@@ -42,19 +43,37 @@ const UserLayout = (props) => {
             <div className={styles.header}>
               <Link to="/">
                 <img alt="logo" className={styles.logo} src={logo} />
-                <span className={styles.title}>Ant Design</span>
+                <span className={styles.title}>PROVENDA</span>
               </Link>
             </div>
             <div className={styles.desc}>
-              <FormattedMessage
-                id="pages.layouts.userLayout.title"
-                defaultMessage="Ant Design 是西湖区最具影响力的 Web 设计规范"
-              />
             </div>
           </div>
           {children}
         </div>
-        <DefaultFooter />
+        <DefaultFooter
+    copyright={`${new Date().getFullYear()} All rights reserved`}
+    links={[
+      {
+        key: 'Judiao Mbaua',
+        title: 'Judiao Mbaua',
+        href: 'https://www.linkedin.com/in/judiao-mbaua-56b39946/',
+        blankTarget: true,
+      },
+      {
+        key: 'github',
+        title: <GithubOutlined />,
+        href: 'https://github.com/jumba2010',
+        blankTarget: true,
+      },
+      {
+        key: 'Judiao Mbaua',
+        title: 'Judiao Mbaua',
+        href: 'https://www.linkedin.com/in/judiao-mbaua-56b39946/',
+        blankTarget: true,
+      },
+    ]}
+  />
       </div>
     </HelmetProvider>
   );

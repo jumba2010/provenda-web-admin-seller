@@ -57,7 +57,7 @@ const CreateProduct = props => {
   const [previewImage,setPreviewImage]= useState('');
   const [previewTitle,setPreviewTitle]= useState('');
   const [fileList, setFileList]=useState([]);
-  const dispatch = props;
+  const {dispatch} = props;
   const [fileNameHistories, setFileNameHistories]=useState([]);
   const history = useHistory();
 

@@ -37,24 +37,24 @@ const menuDataRender = (menuList) =>
 
 const defaultFooterDom = (
   <DefaultFooter
-    copyright={`${new Date().getFullYear()} 蚂蚁集团体验技术部出品`}
+    copyright={`${new Date().getFullYear()} All rights reserved`}
     links={[
       {
-        key: 'Ant Design Pro',
-        title: 'Ant Design Pro',
-        href: 'https://pro.ant.design',
+        key: 'Judiao Mbaua',
+        title: 'Judiao Mbaua',
+        href: 'https://www.linkedin.com/in/judiao-mbaua-56b39946/',
         blankTarget: true,
       },
       {
         key: 'github',
         title: <GithubOutlined />,
-        href: 'https://github.com/ant-design/ant-design-pro',
+        href: 'https://github.com/jumba2010',
         blankTarget: true,
       },
       {
-        key: 'Ant Design',
-        title: 'Ant Design',
-        href: 'https://ant.design',
+        key: 'Judiao Mbaua',
+        title: 'Judiao Mbaua',
+        href: 'https://www.linkedin.com/in/judiao-mbaua-56b39946/',
         blankTarget: true,
       },
     ]}
