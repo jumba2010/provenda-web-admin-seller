@@ -1,6 +1,16 @@
-# Ant Design Pro
+INTRODUCTION
+------------
+Sellers module for online sales platform, made with react and redux using firebase as backend
 
-This project is initialized with [Ant Design Pro](https://pro.ant.design). Follow is the quick guide for how to use.
+REQUIREMENTS
+------------
+* Nodejs 8 or higher
+
+MAINTAINERS
+-----------
+Current maintainers:
+ * Judiao Mbaua (https://www.linkedin.com/in/judiao-mbaua-56b39946/)
+
 
 ## Environment Prepare
 
@@ -15,12 +25,6 @@ or
 ```bash
 yarn
 ```
-
-## Provided Scripts
-
-Ant Design Pro provides some useful script to help you quick start and build with web project, code style check and test.
-
-Scripts provided in `package.json`. It's safe to modify or add additional script:
 
 ### Start project
 
@@ -52,6 +56,3 @@ npm run lint:fix
 npm test
 ```
 
-## More
-
-You can view full document on our [official website](https://pro.ant.design). And welcome any feedback in our [github](https://github.com/ant-design/ant-design-pro).
