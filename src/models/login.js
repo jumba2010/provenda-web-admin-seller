@@ -3,7 +3,7 @@ import { router } from 'umi';
 import { fakeAccountLogin } from '@/services/login';
 import { setAuthority } from '@/utils/authority';
 import { getPageQuery } from '@/utils/utils';
-import {signOut} from '../services/user';
+import {logout} from '../services/auth';
 const Model = {
   namespace: 'login',
   state: {
@@ -43,7 +43,6 @@ const Model = {
 
     logout() {
       const { redirect } = getPageQuery(); // Note: There may be security issues, please note
-
       if (window.location.pathname !== '/user/login' && !redirect) {
         router.replace({
           pathname: '/user/login',
@@ -52,7 +51,7 @@ const Model = {
           }),
         });
 
-        signOut();
+       logout()
       }
     },
   },

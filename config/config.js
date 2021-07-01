@@ -63,7 +63,7 @@ export default defineConfig({
               path: '/welcome',
               name: 'welcome',
               icon: 'smile',
-              component: './dashboard/analysis',
+              component: 'Welcome',
             },
             {
               path: '/product',

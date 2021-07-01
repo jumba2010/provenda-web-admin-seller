@@ -12,7 +12,7 @@ export const login = (token) => {
   localStorage.setItem(TOKEN_KEY, token);
 };
 export const getUserDetails = () =>localStorage.getItem(USER_KEY);
-export const logout = () => {
+export const signOut = () => {
   localStorage.removeItem(TOKEN_KEY);
   localStorage.removeItem(USER_KEY);   
   localStorage.removeItem(SUCURSAL);

@@ -2,59 +2,58 @@ import { LogoutOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons
 import { Avatar, Menu, Spin } from 'antd';
 import React from 'react';
 import { connect } from 'dva';
-import { useHistory } from "react-router-dom";
 import HeaderDropdown from '../HeaderDropdown';
 import styles from './index.less';
+import {signOut} from './../../services/auth';
+import {useHistory} from 'react-router-dom';
 
-class AvatarDropdown extends React.Component {
-  onMenuClick = event => {
+
+
+const  AvatarDropdown =(props)=> {
+  const {
+    currentUser = {
+      avatar: '',
+      name: '',
+    },
+    menu,
+  } = props;
+
+  const   history=useHistory();
+
+  const onMenuClick = event => {
+ 
     const { key } = event;
-
     if (key === 'logout') {
-      const { dispatch } = this.props;
-
-      if (dispatch) {
-        dispatch({
-          type: 'login/logout',
-        });
-      }
-
-      return;
+      signOut();
+      history.push('/user/login')
+      console.log("Logged Out")
     }
-
+  
     //this.props.push(`/account/${key}`);
   };
-
-  render() {
-    const {
-      currentUser = {
-        avatar: '',
-        name: '',
-      },
-      menu,
-    } = this.props;
-    const menuHeaderDropdown = (
-      <Menu className={styles.menu} selectedKeys={[]} onClick={this.onMenuClick}>
-        {menu && (
-          <Menu.Item key="center">
-            <UserOutlined />
-           Profile
-          </Menu.Item>
-        )}
-        {menu && (
-          <Menu.Item key="settings">
-            <SettingOutlined />
-            Setings
-          </Menu.Item>
-        )}
-        {menu && <Menu.Divider />}
-
-        <Menu.Item key="logout">
-          <LogoutOutlined />
-          Logout
+  const menuHeaderDropdown = (
+    <Menu className={styles.menu} selectedKeys={[]} onClick={onMenuClick}>
+      {menu && (
+        <Menu.Item key="center">
+          <UserOutlined />
+         Profile
         </Menu.Item>
-      </Menu>
-    );
+      )}
+      {menu && (
+        <Menu.Item key="settings">
+          <SettingOutlined />
+          Setings
+        </Menu.Item>
+      )}
+      {menu && <Menu.Divider />}
+
+      <Menu.Item key="logout">
+        <LogoutOutlined />
+        Logout
+      </Menu.Item>
+    </Menu>
+  );
+
     return currentUser && currentUser.name ? (
       <HeaderDropdown overlay={menuHeaderDropdown}>
         <span className={`${styles.action} ${styles.account}`}>
@@ -71,7 +70,7 @@ class AvatarDropdown extends React.Component {
         }}
       />
     );
-  }
+  
 }
 
 export default connect(({ user }) => ({
