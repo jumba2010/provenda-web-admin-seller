@@ -3,7 +3,7 @@ import { router } from 'umi';
 import { fakeAccountLogin } from '@/services/login';
 import { setAuthority } from '@/utils/authority';
 import { getPageQuery } from '@/utils/utils';
-import {logout} from '../services/auth';
+import {signOut} from '../services/auth';
 const Model = {
   namespace: 'login',
   state: {
@@ -51,7 +51,7 @@ const Model = {
           }),
         });
 
-       logout()
+       signOut()
       }
     },
   },
